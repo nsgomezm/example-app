@@ -4,8 +4,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->middleware('auth')->name('home');
 
-Route::get('/asd', function(){
-   return view('alter');
-})->name('alter');
+
+Route::group(['controller' => \App\Http\Controllers\Auth\AuthController::class],function(){
+    Route::get('/login', 'login')->name('login');
+    Route::get('/register', 'register')->name('register');
+
+    Route::post('/Authenticate', 'authenticate')->name('authenticate');
+});
+
+
+
+
