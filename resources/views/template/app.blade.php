@@ -18,9 +18,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link" href="{{ route('home') }}">Home</a>
-            <a class="nav-link" href="{{ route('login') }}">Login</a>
-            <a class="nav-link" href="{{ route('register') }}">Register</a>
+            <a class="nav-link" href="{{ route('home') }}">
+                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="rounded-pill" width="30" height="30">
+            </a>
+              @if(!auth()->check())
+                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                <a class="nav-link" href="{{ route('register') }}">Register</a>
+              @endif
           </div>
         </div>
       </div>
