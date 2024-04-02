@@ -6,13 +6,6 @@
             <form method="POST" action="{{ route('store') }}">
                 @csrf
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"  value="{{ old('name') }}" required>
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input type="text" class="form-control  @error('email') is-invalid @enderror" id="email"  name="email" value="{{ old('email') }}" required>
                     @error('email')

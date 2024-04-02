@@ -25,8 +25,8 @@ class AuthController extends Controller
 
     public function authenticate(Request $request){
         $request->validate([
-           'email' => ['required', 'email', new EmailSena()],
-           'password' => ['required', 'string'],
+            'email' => ['required', 'email', new EmailSena()],
+            'password' => ['required', 'string'],
         ]);
 
         if(auth()->attempt($request->only(['email', 'password']))){
@@ -37,6 +37,8 @@ class AuthController extends Controller
 
     public function store(RegisterRequest $request){
         $user = new User($request->validated());
+
+        $user->save();
 
         return redirect()->route('login');
     }
