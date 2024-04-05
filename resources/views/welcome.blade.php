@@ -2,8 +2,9 @@
 @section('content')
     <div class="container py-5">
         <div class="card">
-            <div class="card-header border-0 bg-secondary-subtle">
+            <div class="card-header border-0 bg-secondary-subtle d-flex align-items-center justify-content-between">
                 <h3 class="card-title">Usuarios</h3>
+                <a href="{{ route('user.form') }}" class="btn btn-primary">Agregar usuario</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,7 +31,9 @@
                                     <td>N/A</td>
                                     <td>N/A</td>
                                     <td>N/A</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="{{ route('user.form', $user->id ) }}" class="btn btn-info">Editar</a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

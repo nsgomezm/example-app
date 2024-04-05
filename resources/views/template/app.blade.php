@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="#">{{ env('APP_NAME') }}</a>
+            <a class="navbar-brand fw-bold" href="/">{{ env('APP_NAME') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,11 @@
                     @auth
                         <div class="dropdown">
                             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="me-2">{{ auth()->user()?->name }}</span>
-                                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="rounded-pill"
+                                <span class="me-2">{{ auth()->user()?->personalInformation->name ?? auth()->user()->email }}</span>
+                                <img src="{{ auth()->user()->avatar }}" class="rounded-pill"
                                     width="30" height="30">
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a type="button" class="dropdown-item" href="{{ route('logout') }}">
                                         Cerrar sesión

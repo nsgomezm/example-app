@@ -3,9 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserPersonalInformation;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -22,6 +25,11 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    protected $appends = [
+        'avatar'
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -30,6 +38,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+
+    protected function avatar(): Attribute
+    {
+
+        $name = $this->personalInformation?->name ?? $this->email;
+
+        return new Attribute(
+            get: fn () => "https://ui-avatars.com/api/?name=$name"
+        );
+    }
+
+    public function getAvatarAttributes(){
+        return "test";
+    }
+
 
     /**
      * Get the attributes that should be cast.
@@ -44,4 +68,11 @@ class User extends Authenticatable
             'updated_at' => 'date:d-M-Y'
         ];
     }
+
+    public function personalInformation(){
+        return $this->hasOne(UserPersonalInformation::class);
+    }
+
+
 }
+
