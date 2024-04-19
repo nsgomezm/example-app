@@ -6,7 +6,7 @@
                 <h3 class="card-title">Formulario</h3>
             </div>
             <div class="card-body">
-                <form action="{{ $user?->id ? route('user.update', $user?->id) : route('user.store') }}" method="POST" autocomplete="off">
+                <form action="{{ $user?->id ? route('user.update', $user?->id) : route('user.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                     @csrf
 
                     @php
@@ -17,6 +17,14 @@
                     @if($alert)
                         <div class="alert alert-{{$alert['type']}}">
                             {{ $alert['message'] }}
+
+                            <br>
+
+                            @if($alert['type'] == 'warning')
+                                <a href="{{ route('user.send-verified-email') }}" class="btn btn-primary">
+                                    Enviar email
+                                </a>
+                            @endif
                         </div>
                     @endif
 
@@ -91,12 +99,16 @@
                                     'is-invalid' => $errors->has('date_born')]) id="date_born" name="date_born" value="{{ old('date_born') ?? $user?->personalInformation?->date_born}}">
                                 @error('date_born') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-
                             <div class="mb-4">
                                 <label for="photo" class="form-label">Foto</label>
-                                <input @class(['form-control',
-                                    'is-valid' => old('photo') && !$errors->has('photo'),
-                                    'is-invalid' => $errors->has('photo')]) type="file" id="formFile" name="photo">
+                                <div class="input-group">
+                                    <input @class(['form-control',
+                                        'is-valid' => old('photo') && !$errors->has('photo'),
+                                        'is-invalid' => $errors->has('photo')]) type="file" id="formFile" name="photo">
+                                        <a href="{{ $user?->personalInformation?->photo_url }}" target="_blank" class="btn btn-primary">
+                                            File
+                                        </a>
+                                </div>
                                 @error('photo') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>

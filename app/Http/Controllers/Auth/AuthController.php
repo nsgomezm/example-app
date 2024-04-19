@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Rules\EmailSena;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -37,8 +38,11 @@ class AuthController extends Controller
 
     public function store(RegisterRequest $request){
         $user = new User($request->validated());
-
         $user->save();
+
+        Auth::login($user);
+        auth()->user()->sendEmailVerificationNotification();
+
 
         return redirect()->route('login');
     }

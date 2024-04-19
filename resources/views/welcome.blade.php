@@ -1,6 +1,16 @@
 @extends('template.app')
 @section('content')
     <div class="container py-5">
+         @php
+             $alert = Session()->get('alert');
+         @endphp
+
+
+        @if($alert)
+            <div class="alert alert-{{$alert['type']}} d-flex justify-content-between align-items-center">
+                <span>{{ $alert['message'] }}</span>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header border-0 bg-secondary-subtle d-flex align-items-center justify-content-between">
                 <h3 class="card-title">Usuarios</h3>

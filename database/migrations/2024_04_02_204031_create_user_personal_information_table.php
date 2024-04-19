@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->date('date_born');
+            $table->string('photo');
             $table->timestamps();
             $table->foreignUuid('user_id');
             // $table->foreign('user_id')->references('id')->on('users');

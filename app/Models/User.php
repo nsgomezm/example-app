@@ -50,10 +50,6 @@ class User extends Authenticatable
         );
     }
 
-    public function getAvatarAttributes(){
-        return "test";
-    }
-
 
     /**
      * Get the attributes that should be cast.
